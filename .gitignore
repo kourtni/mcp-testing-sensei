@@ -1,0 +1,64 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyd
+*.so
+
+# direnv
+.direnv/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env/
+
+# Distribution / build outputs
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.#*
+
+# Nix-specific files
+result
+*.drv
+*.nix.d/
+
+# Test and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.coverage.*
+
+# Pytest
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Agentic Coding specific files
+.gemini/
+.claude/
+.openai/
+.mcp.json
+
+# Pre-commit Tools
+.mypy_cache/
+.ruff_cache/

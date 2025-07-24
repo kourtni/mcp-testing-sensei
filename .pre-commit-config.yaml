@@ -1,0 +1,34 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+  - repo: local
+    hooks:
+      - id: ruff-format
+        name: ruff-format
+        entry: nix develop --command ruff format
+        language: system
+        always_run: true
+        pass_filenames: false
+      - id: ruff
+        name: ruff
+        entry: nix develop --command ruff check --fix
+        language: system
+        always_run: true
+        pass_filenames: false
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: nix develop --command bash -c "PYTHONPATH=. pytest"
+        language: system
+        always_run: true
+        pass_filenames: false
