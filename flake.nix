@@ -11,13 +11,13 @@
       pkgs = import nixpkgs {
         inherit system;
       };
-      
+
       # Create a Python environment with runtime dependencies
       pythonEnv = pkgs.python312.withPackages (ps: with ps; [
         mcp
         pytest
       ]);
-      
+
       # Create a Python environment with build/distribution tools
       pythonBuildEnv = pkgs.python312.withPackages (ps: with ps; [
         mcp
@@ -45,7 +45,7 @@
             pkgs.gh
             pkgs.jq
           ];
-          
+
           shellHook = ''
             echo "MCP Testing Sensei Development Environment"
             echo "Python version: $(python --version)"
@@ -62,7 +62,7 @@
             echo ""
           '';
         };
-        
+
         # Minimal shell for just running the server
         runtime = pkgs.mkShell {
           buildInputs = [ pythonEnv ];
@@ -87,7 +87,7 @@
           fi
           exec ${pythonEnv}/bin/python mcp_server.py "$@"
         '';
-        
+
         # Docker image
         docker = pkgs.dockerTools.buildImage {
           name = "mcp-testing-sensei";
@@ -109,7 +109,7 @@
           };
         };
       };
-      
+
       # Utility apps for distribution
       apps.${system} = {
         # Build Python distribution
@@ -120,7 +120,7 @@
             ${pythonBuildEnv}/bin/python -m build
           ''}";
         };
-        
+
         # Build npm package
         build-npm = {
           type = "app";
@@ -129,7 +129,7 @@
             ${pkgs.nodejs_22}/bin/npm pack
           ''}";
         };
-        
+
         # Run all tests
         test-all = {
           type = "app";
@@ -140,7 +140,7 @@
             ${pythonEnv}/bin/python test_mcp_integration.py
           ''}";
         };
-        
+
         # Release helper
         release = {
           type = "app";
@@ -148,11 +148,11 @@
             set -e
             VERSION=''${1:-$(grep version pyproject.toml | head -1 | cut -d'"' -f2)}
             echo "Preparing release v$VERSION..."
-            
+
             # Update versions
             ${pkgs.gnused}/bin/sed -i "s/\"version\": \".*\"/\"version\": \"$VERSION\"/" package.json
             ${pkgs.gnused}/bin/sed -i "s/version = \".*\"/version = \"$VERSION\"/" setup.py
-            
+
             echo "Version updated to $VERSION"
             echo "Run 'git add -A && git commit -m \"Release v$VERSION\"' to commit"
           ''}";

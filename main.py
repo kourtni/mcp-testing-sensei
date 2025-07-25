@@ -29,8 +29,7 @@ async def get_mcp_discovery():
     return {
         'name': 'Testing Sensei',
         'description': (
-            'An MCP server to enforce/guide agentic coding tools to use general '
-            'testing standards.'
+            'An MCP server to enforce/guide agentic coding tools to use general testing standards.'
         ),
         'tools': [
             {
