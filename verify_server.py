@@ -9,7 +9,7 @@ import time
 def verify_server_starts():
     """Check if the MCP server can start successfully."""
     print("Attempting to start MCP server...")
-    
+
     # Try to start the server
     process = subprocess.Popen(
         [sys.executable, "mcp_server.py"],
@@ -17,10 +17,10 @@ def verify_server_starts():
         stderr=subprocess.PIPE,
         text=True
     )
-    
+
     # Give it a moment to start
     time.sleep(2)
-    
+
     # Check if it's still running
     if process.poll() is None:
         print("✓ Server is running!")
@@ -40,19 +40,19 @@ def verify_server_starts():
 def check_imports():
     """Check if we can import the necessary modules."""
     print("Checking module imports...")
-    
+
     try:
-        import linter
+        import linter  # noqa: F401
         print("✓ linter module imported successfully")
     except ImportError as e:
         print(f"✗ Failed to import linter: {e}")
         return False
-    
+
     try:
         # Try importing MCP
-        import mcp
+        import mcp  # noqa: F401
         print("✓ mcp module imported successfully")
-        from mcp.server.fastmcp import FastMCP
+        from mcp.server.fastmcp import FastMCP  # noqa: F401
         print("✓ FastMCP imported successfully")
         return True
     except ImportError as e:
@@ -67,14 +67,14 @@ def main():
     """Run verification checks."""
     print("MCP Server Verification")
     print("=" * 50)
-    
+
     # First check imports
     if not check_imports():
         print("\n⚠️  Cannot verify server without MCP module")
         return
-    
+
     print()
-    
+
     # Then try to start the server
     if verify_server_starts():
         print("\n✅ Server verification successful!")

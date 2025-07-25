@@ -2,7 +2,6 @@
 """Test script for the MCP stdio server."""
 
 import asyncio
-import os
 import sys
 from pathlib import Path
 
@@ -19,14 +18,13 @@ except ImportError:
 
 async def test_mcp_server():
     """Test the MCP server using the MCP client SDK."""
-    
     # Create server parameters for stdio connection
     server_params = StdioServerParameters(
         command=sys.executable,
         args=["mcp_server.py"],
         env=None
     )
-    
+
     try:
         print("Starting MCP server...")
         async with stdio_client(server_params) as (read, write):
@@ -35,34 +33,34 @@ async def test_mcp_server():
                 print("Initializing connection...")
                 await session.initialize()
                 print("✓ Connection initialized")
-                
+
                 # List available tools
                 print("\nListing available tools...")
                 tools = await session.list_tools()
                 print(f"✓ Found {len(tools.tools)} tools:")
                 for tool in tools.tools:
                     print(f"  - {tool.name}: {tool.description}")
-                
+
                 # List available resources
                 print("\nListing available resources...")
                 resources = await session.list_resources()
                 print(f"✓ Found {len(resources.resources)} resources:")
                 for resource in resources.resources:
                     print(f"  - {resource.uri}: {resource.name}")
-                
+
                 # Test lint_code tool
                 print("\nTesting lint_code tool...")
                 test_code = """def test_example():
     if True:
         pass"""
-                
+
                 result = await session.call_tool(
-                    "lint_code", 
+                    "lint_code",
                     arguments={"code": test_code}
                 )
                 print("✓ lint_code result:")
                 print(f"  {result.content[0].text}")
-                
+
                 # Test get_testing_principles tool
                 print("\nTesting get_testing_principles tool...")
                 result = await session.call_tool(
@@ -71,10 +69,10 @@ async def test_mcp_server():
                 )
                 print("✓ get_testing_principles result:")
                 print(f"  {result.content[0].text}")
-                
+
                 print("\n✅ All tests passed!")
                 return True
-                
+
     except Exception as e:
         print(f"\n❌ Test failed: {e}")
         import traceback
