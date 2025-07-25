@@ -10,48 +10,48 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
-      
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install build twine
           pip install -r requirements.txt
-      
+
       - name: Run tests
         run: |
           pip install pytest
           pytest
-      
+
       - name: Build Python distribution
         run: python -m build
-      
+
       - name: Build NPM package
         run: npm pack
-      
+
       - name: Publish to PyPI
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: |
           python -m twine upload dist/*
-      
+
       - name: Publish to NPM
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm publish
-      
+
       - name: Build and push Docker image
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -62,7 +62,7 @@ jobs:
           docker tag $DOCKER_USERNAME/mcp-testing-sensei:${GITHUB_REF#refs/tags/} $DOCKER_USERNAME/mcp-testing-sensei:latest
           docker push $DOCKER_USERNAME/mcp-testing-sensei:${GITHUB_REF#refs/tags/}
           docker push $DOCKER_USERNAME/mcp-testing-sensei:latest
-      
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:

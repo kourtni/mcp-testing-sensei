@@ -91,7 +91,7 @@ dev-install:
 
 format:
 	ruff format .
-	
+
 lint:
 	ruff check .
 	mypy .
