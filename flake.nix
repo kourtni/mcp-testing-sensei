@@ -54,7 +54,7 @@
             echo ""
             echo "Available commands:"
             echo "  python mcp_server.py      - Run the MCP stdio server"
-            echo "  python test_mcp_server.py - Run the test suite"
+            echo "  python test_mcp_integration.py - Run integration tests"
             echo "  pytest                    - Run unit tests"
             echo "  make dist                 - Build all distributions"
             echo "  make publish-test         - Publish to test PyPI"
@@ -136,7 +136,7 @@
           program = "${pkgs.writeShellScript "test-all" ''
             echo "Running all tests..."
             ${pythonEnv}/bin/pytest
-            ${pythonEnv}/bin/python test_mcp_server.py
+            ${pythonEnv}/bin/python test_mcp_integration.py
           ''}";
         };
         

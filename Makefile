@@ -14,7 +14,7 @@ clean:
 # Run tests
 test:
 	pytest
-	python test_mcp_server.py
+	python test_mcp_integration.py
 
 # Build all distributions
 dist: sync-version pypi-build npm-build docker-build
