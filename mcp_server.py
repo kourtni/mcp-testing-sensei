@@ -2,7 +2,6 @@
 """MCP Testing Sensei - Stdio Server Implementation."""
 
 from mcp.server.fastmcp import FastMCP
-from mcp.types import TextContent
 
 import linter
 
@@ -12,11 +11,11 @@ mcp = FastMCP("Testing Sensei")
 
 @mcp.tool()
 def lint_code(code: str) -> dict:
-    """Lints a snippet of unit test code and returns a list of any violations.
-    
+    """Lint a snippet of unit test code and return a list of any violations.
+
     Args:
         code: The unit test code to analyze
-        
+
     Returns:
         A dictionary containing violations found in the code
     """
@@ -26,8 +25,8 @@ def lint_code(code: str) -> dict:
 
 @mcp.tool()
 def get_testing_principles() -> dict:
-    """Retrieves the core principles for writing effective unit tests.
-    
+    """Retrieve the core principles for writing effective unit tests.
+
     Returns:
         A dictionary containing the testing principles
     """
@@ -46,7 +45,7 @@ def get_testing_principles() -> dict:
 
 @mcp.resource("file:///unit-testing-principles.md")
 def get_principles_resource() -> str:
-    """Provides unit testing principles as a resource."""
+    """Provide unit testing principles as a resource."""
     principles = [
         "Tests should be written before implementation.",
         "Tests should document the behavior of the system under test.",

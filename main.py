@@ -1,3 +1,5 @@
+"""Legacy HTTP server implementation (deprecated - use mcp_server.py instead)."""
+
 import argparse
 
 import fastapi

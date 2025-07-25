@@ -1,3 +1,5 @@
+"""Unit test linting module for enforcing testing best practices."""
+
 import re
 
 

@@ -1,3 +1,5 @@
+"""Unit tests for the linter module."""
+
 from linter import check_test_code
 
 

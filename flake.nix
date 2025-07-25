@@ -134,6 +134,7 @@
         test-all = {
           type = "app";
           program = "${pkgs.writeShellScript "test-all" ''
+            set -e
             echo "Running all tests..."
             ${pythonEnv}/bin/pytest
             ${pythonEnv}/bin/python test_mcp_integration.py
