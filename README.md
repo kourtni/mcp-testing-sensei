@@ -18,13 +18,43 @@ This tool aims to promote the following unit testing principles:
 *   **`get_testing_principles` tool**: Provides the core unit testing principles to guide LLMs in generating better tests.
 *   **`unit-testing-principles` resource**: Exposes testing principles as an MCP resource.
 
-## Getting Started
+## Installation
 
-### Prerequisites
+### Option 1: Install from PyPI (Recommended)
+
+The easiest way to install MCP Testing Sensei is via pip:
+
+```bash
+pip install mcp-testing-sensei
+```
+
+This installs the `mcp-testing-sensei` command globally.
+
+### Option 2: Install from npm
+
+If you prefer using npm:
+
+```bash
+npm install -g @kourtni/mcp-testing-sensei
+```
+
+Note: This still requires Python to be installed on your system.
+
+### Option 3: Using Docker
+
+```bash
+docker pull kourtni/mcp-testing-sensei
+```
+
+### Option 4: Development Setup with Nix
+
+For development or if you want to build from source:
+
+#### Prerequisites
 
 *   [Nix](https://nixos.org/download/) (for reproducible development environment)
 
-### Development Environment Setup
+#### Development Environment Setup
 
 To enter the development environment with all dependencies:
 
@@ -64,13 +94,51 @@ python mcp_server.py
 
 The server communicates via stdio, reading JSON-RPC messages from stdin and writing responses to stdout.
 
-### Using with MCP Clients
+## Using with MCP Clients
 
 The server can be integrated with MCP-compatible clients like Claude Desktop or other tools that support the Model Context Protocol.
 
-#### Example configuration for Claude Desktop
+### Configuration for Claude Desktop
 
-Add the following to your Claude Desktop configuration:
+#### If installed via pip:
+
+```json
+{
+  "mcpServers": {
+    "testing-sensei": {
+      "command": "mcp-testing-sensei"
+    }
+  }
+}
+```
+
+#### If installed via npm:
+
+```json
+{
+  "mcpServers": {
+    "testing-sensei": {
+      "command": "npx",
+      "args": ["@kourtni/mcp-testing-sensei"]
+    }
+  }
+}
+```
+
+#### If using Docker:
+
+```json
+{
+  "mcpServers": {
+    "testing-sensei": {
+      "command": "docker",
+      "args": ["run", "-i", "kourtni/mcp-testing-sensei"]
+    }
+  }
+}
+```
+
+#### If running from source:
 
 ```json
 {
@@ -83,15 +151,23 @@ Add the following to your Claude Desktop configuration:
 }
 ```
 
-#### Testing the Server
+### Testing the Server
 
-You can test the MCP server using the included test script:
+To verify the server is working correctly, you can use the integration test script:
 
 ```bash
+# For development testing
 python test_mcp_integration.py
 ```
 
-This will send JSON-RPC messages to the server and display the responses.
+This will:
+- Start the MCP server
+- Send test requests to verify the tools are working
+- Display the responses
+
+The server itself doesn't have a standalone test mode - it's designed to be used with MCP clients.
+
+## Development
 
 ### Running Tests
 
@@ -125,4 +201,7 @@ tests/
 
 Contributions are welcome! Please ensure your changes adhere to the established unit testing principles and project conventions.
 
-```
+## Additional Documentation
+
+- [DISTRIBUTION.md](DISTRIBUTION.md) - Detailed guide for all distribution methods
+- [RELEASE.md](RELEASE.md) - Release process and version management
