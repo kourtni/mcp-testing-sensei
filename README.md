@@ -88,7 +88,7 @@ Add the following to your Claude Desktop configuration:
 You can test the MCP server using the included test script:
 
 ```bash
-python test_mcp_server.py
+python test_mcp_integration.py
 ```
 
 This will send JSON-RPC messages to the server and display the responses.
@@ -116,7 +116,7 @@ linter.py           # Core linting logic
 mcp_server.py       # MCP stdio server implementation
 main.py             # Legacy HTTP server (can be removed)
 pyproject.toml
-test_mcp_server.py  # Test script for the MCP server
+test_mcp_integration.py  # Integration test script for the MCP server
 tests/
     test_linter.py  # Unit tests for the linter logic
 ```

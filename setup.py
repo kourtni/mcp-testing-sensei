@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="mcp-testing-sensei",
-    version="0.1.3",
+    version="0.1.4",
     author="Kourtni Marshall",
     description="An MCP server to enforce testing standards",
     long_description=long_description,
