@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12']
+        python-version: ['3.10', '3.11', '3.12']
     
     steps:
       - uses: actions/checkout@v4
@@ -39,9 +39,9 @@ jobs:
         run: |
           pytest
       
-      - name: Test MCP server
+      - name: Test MCP integration
         run: |
-          python test_mcp_server.py
+          python test_mcp_integration.py
   
   build:
     runs-on: ubuntu-latest
