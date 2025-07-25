@@ -1,10 +1,10 @@
-# MCP Unit Test Sensei
+# MCP Testing Sensei
 
-This project implements an MCP (Model Context Protocol) server designed to enforce and guide agentic coding tools (like Gemini CLI or Claude Code) in adhering to general unit testing standards.
+This project implements an MCP (Model Context Protocol) stdio server designed to enforce and guide agentic coding tools (like Gemini CLI or Claude Code) in adhering to language agnostic unit testing principles.
 
 ## Core Principles Enforced
 
-This linter aims to promote the following unit testing principles:
+This tool aims to promote the following unit testing principles:
 
 *   **Tests should be written before implementation.** (BDD/TDD for the win)
 *   **Tests should document the behavior of the system under test.**
@@ -14,9 +14,9 @@ This linter aims to promote the following unit testing principles:
 
 ## Features
 
-*   **Linting Endpoint (`/lint`)**: Analyzes provided code snippets for violations of the defined unit testing standards.
-*   **Principles Endpoint (`/testing-principles`)**: Provides the core unit testing principles to guide LLMs in generating better tests.
-*   **MCP Discovery (`/.well-known/model-context-protocol`)**: Allows MCP-compatible tools to discover the linter's capabilities.
+*   **`lint_code` tool**: Analyzes provided code snippets for violations of the defined unit testing standards.
+*   **`get_testing_principles` tool**: Provides the core unit testing principles to guide LLMs in generating better tests.
+*   **`unit-testing-principles` resource**: Exposes testing principles as an MCP resource.
 
 ## Getting Started
 
@@ -46,43 +46,52 @@ This will create a `result` symlink in your project root, pointing to the built 
 
 #### Using the Standalone Executable
 
-After building, you can run the server directly from the `result` symlink:
+After building, you can run the MCP stdio server directly from the `result` symlink:
 
 ```bash
-./result/bin/mcp-unit-test-linter --port 8181
+./result/bin/mcp-testing-sensei
 ```
 
-This will start the server, typically accessible at `http://localhost:8181`.
+This will start the MCP server that communicates via standard input/output.
 
 #### Running from Development Environment
 
-Alternatively, if you are in the `nix develop` shell, you can start the FastAPI server:
+Alternatively, if you are in the `nix develop` shell, you can run the MCP server:
 
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
+python mcp_server.py
 ```
 
-This will start the server, typically accessible at `http://localhost:8000`.
+The server communicates via stdio, reading JSON-RPC messages from stdin and writing responses to stdout.
 
-### Testing the Endpoints
+### Using with MCP Clients
 
-#### Linting Code
+The server can be integrated with MCP-compatible clients like Claude Desktop or other tools that support the Model Context Protocol.
+
+#### Example configuration for Claude Desktop
+
+Add the following to your Claude Desktop configuration:
+
+```json
+{
+  "mcpServers": {
+    "testing-sensei": {
+      "command": "python",
+      "args": ["/path/to/mcp-testing-sensei/mcp_server.py"]
+    }
+  }
+}
+```
+
+#### Testing the Server
+
+You can test the MCP server using the included test script:
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"code": "def test_example():\n    if True:\n        pass"}' http://localhost:8000/lint
+python test_mcp_server.py
 ```
 
-#### Getting Testing Principles
-
-```bash
-curl http://localhost:8000/testing-principles
-```
-
-#### MCP Discovery
-
-```bash
-curl http://localhost:8000/.well-known/model-context-protocol
-```
+This will send JSON-RPC messages to the server and display the responses.
 
 ### Running Tests
 
@@ -101,15 +110,15 @@ pytest
 ## Project Structure
 
 ```
-.mcp.json
 flake.lock
 flake.nix
-linter.py
-main.py
+linter.py           # Core linting logic
+mcp_server.py       # MCP stdio server implementation
+main.py             # Legacy HTTP server (can be removed)
 pyproject.toml
-server.log
-.gemini/
-    settings.json
+test_mcp_server.py  # Test script for the MCP server
+tests/
+    test_linter.py  # Unit tests for the linter logic
 ```
 
 ## Contributing

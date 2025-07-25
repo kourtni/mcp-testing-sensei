@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcp-testing-sensei"
+version = "0.1.0"
+description = "An MCP server to enforce/guide agentic coding tools to use general unit testing standards."
+authors = [{name = "Kourtni Marshall"}]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "mcp>=1.6.0",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/kourtni/mcp-testing-sensei"
+
+[project.scripts]
+mcp-testing-sensei = "mcp_server:main"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",  # Error
+    "W",  # Warning
+    "F",  # Pyflakes
+    "I",  # isort
+    "D",  # pydocstyle
+]
+
+ignore = [
+    "D105", # Missing docstring in magic method
+    "D107", # Missing docstring in __init__
+    "D406", # Section name should end with a colon
+    "D407", # Missing dashed underline after section header
+    "D413", # Missing blank line after last section
+]
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"

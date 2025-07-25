@@ -25,10 +25,10 @@ async def lint_code(request: LintRequest):
 async def get_mcp_discovery():
     """Return the Model Context Protocol discovery information."""
     return {
-        'name': 'Unit Test Linter',
+        'name': 'Testing Sensei',
         'description': (
             'An MCP server to enforce/guide agentic coding tools to use general '
-            'unit testing standards.'
+            'testing standards.'
         ),
         'tools': [
             {
@@ -77,7 +77,7 @@ async def get_testing_principles():
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Run MCP Unit Test Linter FastAPI application.')
+    parser = argparse.ArgumentParser(description='Run MCP Testing Sensei FastAPI application.')
     parser.add_argument(
         '--port', type=int, default=8181, help='Port to run the FastAPI application on.'
     )

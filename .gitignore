@@ -62,3 +62,19 @@ htmlcov/
 # Pre-commit Tools
 .mypy_cache/
 .ruff_cache/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tgz
+
+# Credentials
+.pypirc
+.npmrc
+.env.local
+
+# Test artifacts
+.tox/
+.hypothesis/

@@ -1,0 +1,20 @@
+{
+  "name": "@kourtni/mcp-testing-sensei",
+  "version": "0.1.3",
+  "description": "MCP server for testing standards",
+  "bin": {
+    "mcp-testing-sensei": "run.js"
+  },
+  "files": [
+    "run.js",
+    "mcp_server.py",
+    "linter.py",
+    "requirements.txt"
+  ],
+  "keywords": [
+    "mcp",
+    "testing",
+    "linter"
+  ],
+  "license": "MIT"
+}
