@@ -12,7 +12,7 @@ __version__ = '0.1.5'
 
 
 # Core testing principles
-TESTING_PRINCIPLES = [
+TESTING_PRINCIPLES = (
     'Tests should be written before implementation.',
     'Tests should document the behavior of the system under test.',
     'Tests should be small, clearly written, and have a single concern.',
@@ -21,7 +21,7 @@ TESTING_PRINCIPLES = [
         'their environment and other Tests.'
     ),
     'Tests should be written in a declarative manner and never have branching logic.',
-]
+)
 
 # Create the MCP server
 mcp = mcp.server.fastmcp.FastMCP('Testing Sensei')
@@ -66,7 +66,7 @@ def main():
         '-v', '--version', action='version', version=f'MCP Testing Sensei {__version__}'
     )
 
-    parser.parse_args()
+    parser.parse_known_args()
 
     # Run the MCP server
     mcp.run()
