@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mcp-testing-sensei"
-version = "0.1.5"
+version = "0.2.0"
 description = "An MCP server to enforce/guide agentic coding tools to use general unit testing standards."
 authors = ["Kourtni Marshall"]
 readme = "README.md"
