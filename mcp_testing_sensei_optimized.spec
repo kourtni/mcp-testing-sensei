@@ -86,7 +86,6 @@ pyz = PYZ(
     a.pure,
     a.zipped_data,
     cipher=block_cipher,
-    optimize=2,  # Enable Python optimization
 )
 
 exe = EXE(
