@@ -47,6 +47,9 @@ def main():
         # Update flake.nix (if needed)
         update_file('flake.nix', r'version = "[^"]+?"', f'version = "{version}"')
 
+        # Update mcp_server.py
+        update_file('mcp_server.py', r"__version__ = '[^']+?'", f"__version__ = '{version}'")
+
         print(f'\n✓ Version {version} synced across all files')
 
     except Exception as e:
