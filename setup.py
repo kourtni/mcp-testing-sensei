@@ -7,9 +7,9 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 
 setup(
     name='mcp-testing-sensei',
-    version='0.2.0',
+    version='0.2.1',
     author='Kourtni Marshall',
-    description='An MCP server to enforce testing standards',
+    description='An MCP server to guide language agnostic testing principles',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/kourtni/mcp-testing-sensei',
