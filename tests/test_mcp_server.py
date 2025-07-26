@@ -1,5 +1,8 @@
 """Unit tests for the mcp_server module."""
 
+import sys
+import unittest.mock
+
 import mcp_server
 
 
@@ -17,12 +20,34 @@ class TestVersion:
         assert all(part.isdigit() for part in parts)
 
 
+class TestArgumentParsing:
+    """Tests for argument parsing behavior."""
+
+    def test_parse_known_args_allows_extra_args(self):
+        """Test that extra arguments don't cause the parser to fail."""
+        # Save original argv
+        original_argv = sys.argv
+
+        try:
+            # Test with extra arguments that might be passed to mcp.run()
+            sys.argv = ['mcp_server.py', '--host', 'localhost', '--port', '8080']
+
+            # This should not raise an error
+            with unittest.mock.patch('mcp.server.fastmcp.FastMCP.run'):
+                # Should complete without error
+                mcp_server.main()
+
+        finally:
+            # Restore original argv
+            sys.argv = original_argv
+
+
 class TestTestingPrinciples:
     """Tests for testing principles functions."""
 
     def test_testing_principles_constant(self):
         """Test that TESTING_PRINCIPLES is properly defined."""
-        assert isinstance(mcp_server.TESTING_PRINCIPLES, list)
+        assert isinstance(mcp_server.TESTING_PRINCIPLES, tuple)
         assert len(mcp_server.TESTING_PRINCIPLES) == 5
         assert all(isinstance(principle, str) for principle in mcp_server.TESTING_PRINCIPLES)
 
