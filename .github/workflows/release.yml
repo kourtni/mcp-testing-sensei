@@ -34,9 +34,27 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
 
+      - name: Install UPX
+        if: matrix.os != 'macos-latest'  # UPX doesn't work well on macOS
+        uses: crazy-max/ghaction-upx@v3
+        with:
+          install-only: true
+
       - name: Build executable
+        env:
+          PYTHONOPTIMIZE: 2
         run: |
-          pyinstaller mcp_testing_sensei.spec
+          pyinstaller mcp_testing_sensei_optimized.spec --clean --log-level WARN
+
+      - name: Apply additional compression
+        if: matrix.os != 'macos-latest'
+        shell: bash
+        run: |
+          if [ "${{ matrix.os }}" == "windows-latest" ]; then
+            upx --best --lzma dist/mcp-testing-sensei.exe || true
+          else
+            upx --best --lzma dist/mcp-testing-sensei || true
+          fi
 
       - name: Rename executable
         shell: bash

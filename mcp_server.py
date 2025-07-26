@@ -8,7 +8,7 @@ import mcp.server.fastmcp
 import linter
 
 # Version of the package - keep in sync with pyproject.toml
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 
 # Core testing principles
