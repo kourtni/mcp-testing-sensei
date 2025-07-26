@@ -20,9 +20,23 @@ This tool aims to promote the following unit testing principles:
 
 ## Installation
 
-### Option 1: Install from PyPI (Recommended)
+### Option 1: Standalone Executable (No Python Required)
 
-The easiest way to install MCP Testing Sensei is via pip:
+Download the pre-built executable for your platform from the [latest release](https://github.com/kourtni/mcp-testing-sensei/releases/latest):
+
+- **Linux**: `mcp-testing-sensei-linux`
+- **macOS**: `mcp-testing-sensei-macos`
+- **Windows**: `mcp-testing-sensei-windows.exe`
+
+Make the file executable (Linux/macOS):
+```bash
+chmod +x mcp-testing-sensei-linux
+./mcp-testing-sensei-linux
+```
+
+### Option 2: Install from PyPI
+
+If you have Python installed, you can use pip:
 
 ```bash
 pip install mcp-testing-sensei
@@ -30,7 +44,7 @@ pip install mcp-testing-sensei
 
 This installs the `mcp-testing-sensei` command globally.
 
-### Option 2: Install from npm
+### Option 3: Install from npm
 
 If you prefer using npm:
 
@@ -40,13 +54,13 @@ npm install -g @kourtni/mcp-testing-sensei
 
 Note: This still requires Python to be installed on your system.
 
-### Option 3: Using Docker
+### Option 4: Using Docker
 
 ```bash
 docker pull kourtni/mcp-testing-sensei
 ```
 
-### Option 4: Development Setup with Nix
+### Option 5: Development Setup with Nix
 
 For development or if you want to build from source:
 

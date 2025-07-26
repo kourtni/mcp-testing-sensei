@@ -26,6 +26,7 @@
         twine
         setuptools
         wheel
+        pyinstaller
       ]);
 
     in
