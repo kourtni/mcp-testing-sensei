@@ -51,9 +51,17 @@ jobs:
         shell: bash
         run: |
           if [ "${{ matrix.os }}" == "windows-latest" ]; then
-            upx --best --lzma dist/mcp-testing-sensei.exe || true
+            if upx --best --lzma dist/mcp-testing-sensei.exe; then
+              echo "UPX compression successful!"
+            else
+              echo "::warning::UPX compression failed, continuing with uncompressed executable"
+            fi
           else
-            upx --best --lzma dist/mcp-testing-sensei || true
+            if upx --best --lzma dist/mcp-testing-sensei; then
+              echo "UPX compression successful!"
+            else
+              echo "::warning::UPX compression failed, continuing with uncompressed executable"
+            fi
           fi
 
       - name: Rename executable
